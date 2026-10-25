@@ -6,7 +6,7 @@ use App\Dominio\Contato\Entidades\Contact;
 
 interface ContactRepository
 {
-    public function save(Contact $contact): void;
+    public function save(Contact $contact): Contact;
     public function findById(int $id): ?Contact;
 
     /** @return array{data: Contact[], total: int} */

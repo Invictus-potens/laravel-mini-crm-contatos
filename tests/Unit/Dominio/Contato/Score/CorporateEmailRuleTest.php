@@ -8,7 +8,7 @@ use App\Dominio\Contato\ObjetosDeValor\Phone;
 use App\Dominio\Contato\Score\CorporateEmailRule;
 use PHPUnit\Framework\TestCase;
 
-class CorporateEmailRuletest extends TestCase
+class CorporateEmailRuleTest extends TestCase
 {
     private function contatoComEmail(string $email): Contact
     {

@@ -10,7 +10,7 @@ use App\Dominio\Contato\ObjetosDeValor\Status;
 use App\Dominio\Contato\Repositorios\ContactRepository;
 use PHPUnit\Framework\TestCase;
 
-class ListContactsUseCasetest extends TestCase
+class ListContactsUseCaseTest extends TestCase
 {
     public function test_retorna_a_pagina_pedida(): void
     {

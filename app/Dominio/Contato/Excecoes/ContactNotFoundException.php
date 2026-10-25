@@ -4,7 +4,7 @@ namespace App\Dominio\Contato\Excecoes;
 
 use DomainException;
 
-final class ContatoNotFoundException extends DomainException
+final class ContactNotFoundException extends DomainException
 {
     public function __construct(int $id)
     {

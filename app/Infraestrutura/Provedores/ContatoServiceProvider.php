@@ -11,6 +11,8 @@ use App\Dominio\Contato\Score\PhoneAreaCodeRule;
 use App\Dominio\Contato\Score\ScoreCalculator;
 use App\Infraestrutura\Persistencia\EloquentContactRepository;
 use Illuminate\Support\ServiceProvider;
+use App\Infraestrutura\Observadores\ContactObserver;
+use App\Infraestrutura\Persistencia\ContactModel;
 
 class ContatoServiceProvider extends ServiceProvider
 {
@@ -30,5 +32,10 @@ class ContatoServiceProvider extends ServiceProvider
             $app->make(ScoreCalculator::class),
             2,
         ));
+    }
+
+    public function boot(): void
+    {
+        ContactModel::observe(ContactObserver::class);
     }
 }

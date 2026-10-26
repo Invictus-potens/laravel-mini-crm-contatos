@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Infraestrutura\Filas\ProcessContactScoreJob;
 
 class ContactController
 {
@@ -70,5 +71,14 @@ class ContactController
         $useCase->execute($id);
 
         return response()->noContent();
+    }
+
+    public function processScore(int $id, ShowContactUseCase $useCase): JsonResponse
+    {
+        $useCase->execute($id);
+
+        ProcessContactScoreJob::dispatch($id);
+
+        return response()->json(['message' => 'Processamento do score enfileirado.'], 202);
     }
 }

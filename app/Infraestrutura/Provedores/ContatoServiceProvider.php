@@ -13,6 +13,10 @@ use App\Infraestrutura\Persistencia\EloquentContactRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Infraestrutura\Observadores\ContactObserver;
 use App\Infraestrutura\Persistencia\ContactModel;
+use App\Dominio\Contato\Eventos\ContactScoreProcessed;
+use App\Infraestrutura\Listeners\BroadcastContactScore;
+use App\Infraestrutura\Listeners\LogContactScore;
+use Illuminate\Support\Facades\Event;
 
 class ContatoServiceProvider extends ServiceProvider
 {
@@ -37,5 +41,8 @@ class ContatoServiceProvider extends ServiceProvider
     public function boot(): void
     {
         ContactModel::observe(ContactObserver::class);
+
+        Event::listen(ContactScoreProcessed::class, LogContactScore::class);
+        Event::listen(ContactScoreProcessed::class, BroadcastContactScore::class);
     }
 }

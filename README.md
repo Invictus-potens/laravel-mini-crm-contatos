@@ -123,7 +123,7 @@ sail artisan test
 - **Unitários** (`tests/Unit`): domínio e aplicação, com o repositório mockado, sem banco e sem Laravel.
 - **Integração** (`tests/Feature`): repositório Eloquent, endpoints HTTP, fila, Job, listeners e Service Provider, com SQLite em memória.
 
-O histórico de commits segue o ciclo **red → green → refactor** (`test:` → `feat:` → `refactor:`).
+O histórico de commits iria seguir o ciclo **red → green → refactor** (`test:` → `feat:` → `refactor:`) mas por questão de tempo, os commits foram feitos juntos então muitos testes aparecem como chore/feat: testes criados e arquivos criados e etc.
 
 ---
 

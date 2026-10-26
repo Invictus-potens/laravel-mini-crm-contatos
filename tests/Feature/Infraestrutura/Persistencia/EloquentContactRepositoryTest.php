@@ -11,15 +11,15 @@ use DateTimeImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class eloquentContactRepositoryTest extends TestCase
+class EloquentContactRepositoryTest extends TestCase
 {
     use RefreshDatabase;
 
     private EloquentContactRepository $repository;
 
-    protected function setup(): void
+    protected function setUp(): void
     {
-        Parent::setup();
+        Parent::setUp();
         $this->repository = new EloquentContactRepository();
     }
 
@@ -39,6 +39,17 @@ class eloquentContactRepositoryTest extends TestCase
             'score' => 0,
             'status' => 'pending',
         ]);
+    }
+
+    public function test_atualiza_contato_existente_sem_duplicar(): void
+    {
+    $salvo = $this->repository->save($this->novoContato());
+
+    $salvo->update('Ana Souza', new Email('ana@empresa.com'), new Phone('21988887777'));
+    $this->repository->save($salvo);
+
+    $this->assertDatabaseCount('contacts', 1);
+    $this->assertDatabaseHas('contacts', ['id' => $salvo->id(), 'name' => 'Ana Souza']);
     }
 
     public function test_busca_contato_por_id(): void
@@ -80,11 +91,11 @@ class eloquentContactRepositoryTest extends TestCase
         $this->repository->save($this->novoContato('b@empresa.com'));
         $this->repository->save($this->novoContato('c@empresa.com'));
 
-        $pagina = $this->repository->pagnate(1, 2);
+        $pagina = $this->repository->paginate(1, 2);
 
         $this->assertCount(2, $pagina['data']);
         $this->assertSame(3, $pagina['total']);
-        $this->assertInstanceOg(Contact::class, $pagina['data'][0]);
+        $this->assertInstanceOf(Contact::class, $pagina['data'][0]);
     }
 
     public function test_exclusao_e_soft_delete(): void

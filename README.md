@@ -157,7 +157,7 @@ O processamento passa por `processing` e termina em `active` com score **60**. O
 
 ## Escutando o WebSocket
 
-Salve como `contato.html`, abra no navegador e dispare o `process-score` do contato 1. A chave precisa ser igual à `REVERB_APP_KEY` do `.env`.
+Salve como `index.html`, abra no navegador e dispare o `process-score` do contato 1. A chave precisa ser igual à `REVERB_APP_KEY` do `.env`.
 
 ```html
 <!DOCTYPE html>
